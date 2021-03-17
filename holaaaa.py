@@ -1,4 +1,4 @@
-rom flask import Flask, jsonify, request
+from flask import Flask, jsonify, request
 from flask_cors import cross_origin
 from random import randint
 app = Flask(__name__)
