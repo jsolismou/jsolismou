@@ -20,22 +20,25 @@ app = Flask(__name__)
 @app.route('/random')
 @cross_origin()
 def random_number():
-    first_num = int(request.args.get('first_num'))
-    second_num = int(request.args.get('second_num'))
-    pupil_name = request.args.get('pupil_name')
-    print(f'{pupil_name} holaaaaaaaaaa')
-    return str(randint(first_num, second_num))
+    # first_num = int(request.args.get('first_num'))
+    # second_num = int(request.args.get('second_num'))
+    # pupil_name = request.args.get('pupil_name')
+    # print(f'{pupil_name} HA HECHO LA REQUEST')
+    # return str(randint(first_num, second_num))
+    return jsonify('hola mundo')
 
 
 
 @app.route('/order', methods=['POST'])
 def order():
     data = request.json
+    data.update({'type': str(type(data))})
+    after_json = jsonify(data)
+    data.update({'after_json': str(type(after_json))})
     numbers = data.get('numbers')
-    numbers = set(numbers)
-    numbers = list(numbers)
-    numbers = sorted(numbers)
-    return jsonify(numbers)
+    numbers = list(set(numbers))
+    numbers.sort(reverse=True)
+    return jsonify(data)
 
 
 
